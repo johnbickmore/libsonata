@@ -142,6 +142,111 @@ Population handling for `EdgeStorage` is analogous to `NodeStorage`:
 >>> selection = population.connecting_edges([1, 2, 3], [4, 5, 6])
 ```
 
+## Reports
+
+### SpikeReader
+```python
+>>> import libsonata
+
+>>> spikes = libsonata.SpikeReader('path/to/H5/file')
+
+# list populations
+>>> spikes.get_populations_names()
+
+# open population
+>>> population = spikes['<name>']
+```
+
+### SpikePopulation
+
+```python
+# get all spikes [(node_id, timestep)]
+>>> population.get()
+[(5, 0.1), (2, 0.2), (3, 0.3), (2, 0.7), (3, 1.3)]
+
+# get all spikes betwen tstart and tstop
+>>> population.get(0.2, 1.0)
+[(2, 0.2), (3, 0.3), (2, 0.7)]
+
+# get spikes attribute sorting (by_time, by_id, none)
+>>> population.sorting
+'by_time'
+```
+
+### SomasReportReader
+```python
+>>> import libsonata
+
+>>> somas = libsonata.SomasReportReader('path/to/H5/file')
+
+# list populations
+>>> somas.get_populations_names()
+
+# open population
+>>> population_somas = somas['<name>']
+```
+
+###SomasReportPopulation
+
+```python
+# get times (tstart, tstop, dt)
+>>> population.times
+(0.0, 1.0, 0.1)
+
+# get unit attributes
+>>> population_somas.time_units
+'ms'
+>>> population_somas.data_units
+'mV'
+
+# node_ids sorted?
+>>> population_somas.sorted
+True
+
+# get the DataFrame of the node_id values for the timesteps between tstart and tstop
+>>> data_frame = population_somas.get(node_ids=[13, 14], tstart=0.8, tstop=1.0)
+
+# get the data values (map of node_id -> values[timesteps]
+>>> data_frame.data
+{13: [13.8, 13.9], 14: [14.8, 14.9]}
+
+# get the list of timesteps
+>>> data_frame.index
+[0.8, 0.9]
+```
+
+### ElementsReportReader
+```python
+>>> import libsonata
+
+>>> elements = libsonata.ElementsReportReader('path/to/H5/file')
+
+# list populations
+>>> elements.get_populations_names()
+
+# open population
+>>> population_elements = elements['<name>']
+```
+
+###ElementsReportPopulation
+
+```python
+# get times (tstart, tstop, dt)
+>>> population_elements.times
+(0.0, 4.0, 0.2)
+
+# get the DataFrame of the node_id values for the timesteps between tstart and tstop
+>>> data_frame = population_elements.get(node_ids=[13, 14], tstart=0.8, tstop=1.0)
+
+# get the data values (map of [node_id, element_id] -> values[timesteps]
+>>> data_frame.data
+{(13, 60): [46.0, 56.0], (13, 61): [46.1, 56.1], (13, 62): [46.2, 56.2], (14, 63): [46.3, 56.3], (14, 64): [46.4, 56.4], (14, 65): [46.5, 56.5]}
+
+# get the list of timesteps
+>>> data_frame.index
+[0.8, 1.0]
+```
+
 # Acknowledgements
 
 This project/research has received funding from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Specific Grant Agreement No. 785907 (Human Brain Project SGA2).
