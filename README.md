@@ -186,7 +186,7 @@ Population handling for `EdgeStorage` is analogous to `NodeStorage`:
 >>> population_somas = somas['<name>']
 ```
 
-###SomasReportPopulation
+### SomasReportPopulation
 
 ```python
 # get times (tstart, tstop, dt)
@@ -228,7 +228,7 @@ True
 >>> population_elements = elements['<name>']
 ```
 
-###ElementsReportPopulation
+### ElementsReportPopulation
 
 ```python
 # get times (tstart, tstop, dt)
