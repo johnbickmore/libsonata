@@ -173,11 +173,11 @@ Population handling for `EdgeStorage` is analogous to `NodeStorage`:
 'by_time'
 ```
 
-### SomasReportReader
+### SomaReportReader
 ```python
 >>> import libsonata
 
->>> somas = libsonata.SomasReportReader('path/to/H5/file')
+>>> somas = libsonata.SomaReportReader('path/to/H5/file')
 
 # list populations
 >>> somas.get_populations_names()
@@ -186,7 +186,7 @@ Population handling for `EdgeStorage` is analogous to `NodeStorage`:
 >>> population_somas = somas['<name>']
 ```
 
-### SomasReportPopulation
+### SomaReportPopulation
 
 ```python
 # get times (tstart, tstop, dt)
@@ -215,11 +215,11 @@ True
 [0.8, 0.9]
 ```
 
-### ElementsReportReader
+### ElementReportReader
 ```python
 >>> import libsonata
 
->>> elements = libsonata.ElementsReportReader('path/to/H5/file')
+>>> elements = libsonata.ElementReportReader('path/to/H5/file')
 
 # list populations
 >>> elements.get_populations_names()
@@ -228,7 +228,7 @@ True
 >>> population_elements = elements['<name>']
 ```
 
-### ElementsReportPopulation
+### ElementReportPopulation
 
 ```python
 # get times (tstart, tstop, dt)
